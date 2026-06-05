@@ -65,54 +65,7 @@ src/main/java/ujc/projecto/jogoautismo/
 
 ---
 
-## 🗄️ Diagrama ER (Entidade-Relacionamento)
 
-```
-┌─────────────────┐        ┌─────────────────────┐
-│   encarregados  │        │       alunos         │
-│─────────────────│        │─────────────────────│
-│ id (PK)         │◄──────┤ encarregado_id (FK)  │
-│ nome            │  1:N   │ id (PK)              │
-│ email           │        │ nome                 │
-│ celular         │        │ apelido              │
-│ parentesco      │        │ nuit                 │
-└─────────────────┘        │ genero               │
-                           │ nivel_autismo        │
-┌─────────────────┐        │ necessidade_especial │
-│   educadores    │        └──────────┬──────────┘
-│─────────────────│                   │
-│ id (PK)         │                   │ 1:N
-│ nome            │        ┌──────────▼──────────┐
-│ email           │        │      progressos      │
-│ celular         │        │─────────────────────│
-│ especialidade   │        │ id (PK)              │
-└─────────────────┘        │ aluno_id (FK)        │
-                           │ atividade_id (FK)    │
-┌─────────────────────────┐│ pontuacao            │
-│  atividades_educativas  ││ data_realizacao      │
-│─────────────────────────│└──────────┬──────────┘
-│ id (PK)                 │           │
-│ titulo                  │◄──────────┘ N:1
-│ descricao               │
-│ nivel_dificuldade       │
-│ tempo_estimado          │
-└─────────────────────────┘
-
-┌─────────────────────────────────────┐
-│              usuarios               │
-│─────────────────────────────────────│
-│ id (PK)                             │
-│ nome                                │
-│ email (unique)                      │
-│ senha (bcrypt)                      │
-│ perfil (ADMIN/EDUCADOR/ENCARREGADO/ │
-│         ALUNO)                      │
-│ ativo                               │
-│ educador_id (FK, nullable)          │
-│ encarregado_id (FK, nullable)       │
-│ aluno_id (FK, nullable)             │
-└─────────────────────────────────────┘
-```
 
 ---
 
