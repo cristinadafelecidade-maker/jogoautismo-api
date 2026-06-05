@@ -63,3 +63,7 @@ public class Aluno {
     public List<Progresso> getProgressos() { return progressos; }
     public void setProgressos(List<Progresso> progressos) { this.progressos = progressos; }
 }
+/**
+ * Entidade responsável por representar um aluno/criança
+ * participante das actividades educativas.
+ */
