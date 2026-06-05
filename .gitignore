@@ -1,0 +1,27 @@
+# Maven
+target/
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Eclipse
+.settings/
+.project
+.classpath
+
+# Logs
+*.log
+
+# Compilados Java
+*.class
+
+# JARs gerados
+*.jar
+*.war
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db

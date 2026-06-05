@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Progresso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/index.html">Jogo Autismo</a>
+        <div class="d-flex align-items-center gap-3">
+            <span id="userInfo" class="text-white small"></span>
+            <button onclick="sair()" class="btn btn-light btn-sm">Sair</button>
+        </div>
+    </div>
+</nav>
+
+<main class="container mt-4">
+    <div class="d-flex justify-content-between align-items-start mb-3">
+        <div>
+            <h2 class="fw-bold mb-1">Progresso / Sessões</h2>
+            <p id="descricaoPerfil" class="text-muted mb-0"></p>
+        </div>
+        <a id="voltarAdmin" href="/dashboard-admin.html" class="btn btn-outline-dark btn-sm d-none">Voltar</a>
+    </div>
+
+    <div id="alunosAssociadosCard" class="card mb-4 d-none">
+        <div class="card-body">
+            <h5 class="fw-bold">Aluno(s) associado(s) ao encarregado</h5>
+            <div id="alunosAssociados" class="row g-3"></div>
+        </div>
+    </div>
+
+    <div id="formCard" class="card mb-4">
+        <div class="card-body">
+            <h5 class="fw-bold">Registar/Editar Progresso</h5>
+            <form id="form" class="row g-3">
+                <input type="hidden" id="id">
+                <div class="col-md-3">
+                    <label class="form-label">Criança</label>
+                    <select id="alunoId" class="form-select" required></select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Atividade</label>
+                    <select id="atividadeId" class="form-select" required></select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Pontuação</label>
+                    <input id="pontuacao" type="number" min="0" max="100" class="form-control" required>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Data</label>
+                    <input id="dataRealizacao" type="date" class="form-control">
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-dark">Guardar</button>
+                    <button type="button" onclick="limpar()" class="btn btn-outline-secondary">Limpar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body table-responsive">
+            <h5 class="fw-bold">Progresso registado</h5>
+            <table class="table table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Criança</th>
+                        <th>Encarregado</th>
+                        <th>Atividade</th>
+                        <th>Pontuação</th>
+                        <th>Data</th>
+                        <th id="acoesHeader">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<script src="/js/api.js"></script>
+<script>
+exigePerfis('ENCARREGADO','EDUCADOR','ADMIN');
+setUserInfo();
+
+const perfilAtual = perfil();
+const somenteConsulta = perfilAtual === 'ENCARREGADO';
+
+async function carregar(){
+    document.getElementById('voltarAdmin').classList.toggle('d-none', perfilAtual !== 'ADMIN');
+
+    if(somenteConsulta){
+        descricaoPerfil.textContent = 'Como encarregado, você consulta apenas o progresso do(s) aluno(s) associado(s) ao seu perfil.';
+        formCard.classList.add('d-none');
+        acoesHeader.classList.add('d-none');
+
+        const meusAlunos = await api('/api/alunos/me');
+        mostrarAlunosAssociados(meusAlunos);
+
+        const progressos = await api('/api/progressos/me');
+        renderTabela(progressos, false);
+        return;
+    }
+
+    descricaoPerfil.textContent = 'ADMIN e EDUCADOR podem registar, editar e remover progresso dos alunos.';
+    formCard.classList.remove('d-none');
+    acoesHeader.classList.remove('d-none');
+
+    await preencherSelect('alunoId','/api/alunos',x=>x.nome+' '+(x.apelido||''));
+    await preencherSelect('atividadeId','/api/atividades',x=>x.titulo);
+    const progressos = await api('/api/progressos');
+    renderTabela(progressos, true);
+}
+
+function mostrarAlunosAssociados(alunos){
+    alunosAssociadosCard.classList.remove('d-none');
+
+    if(!alunos || alunos.length === 0){
+        alunosAssociados.innerHTML = '<div class="col-12"><div class="alert alert-warning mb-0">Nenhum aluno associado a este encarregado.</div></div>';
+        return;
+    }
+
+    alunosAssociados.innerHTML = alunos.map(a=>`
+        <div class="col-md-6 col-lg-4">
+            <div class="border rounded p-3 h-100 bg-light">
+                <h6 class="fw-bold mb-1">${a.nome || ''} ${a.apelido || ''}</h6>
+                <div class="small text-muted">Género: ${a.genero || '-'}</div>
+                <div class="small text-muted">Nível de autismo: ${a.nivelAutismo || '-'}</div>
+                <div class="small text-muted">Necessidade especial: ${a.necessidadeEspecial || '-'}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderTabela(arr, mostrarAcoes){
+    if(!arr || arr.length === 0){
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center text-muted py-4">Nenhum progresso registado.</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = arr.map(r=>`
+        <tr>
+            <td>${r.id}</td>
+            <td>${r.aluno?.nome || ''} ${r.aluno?.apelido || ''}</td>
+            <td>${r.aluno?.encarregado?.nome || '-'}</td>
+            <td>${r.atividade?.titulo || ''}</td>
+            <td><span class="badge bg-success">${r.pontuacao}</span></td>
+            <td>${r.dataRealizacao || ''}</td>
+            ${mostrarAcoes ? `<td><button class="btn btn-warning btn-sm" onclick='editar(${JSON.stringify(r)})'>Editar</button> <button class="btn btn-danger btn-sm" onclick="remover(${r.id})">Remover</button></td>` : '<td class="d-none"></td>'}
+        </tr>
+    `).join('');
+}
+
+function editar(r){
+    id.value = r.id;
+    alunoId.value = r.aluno?.id || '';
+    atividadeId.value = r.atividade?.id || '';
+    pontuacao.value = r.pontuacao || 0;
+    dataRealizacao.value = r.dataRealizacao || today();
+}
+
+function limpar(){
+    if(form){
+        form.reset();
+        id.value = '';
+        dataRealizacao.value = today();
+    }
+}
+
+async function remover(i){
+    if(confirm('Remover progresso?')){
+        await api('/api/progressos/'+i,{method:'DELETE'});
+        carregar();
+    }
+}
+
+if(form){
+    form.onsubmit = async e=>{
+        e.preventDefault();
+        const obj = {
+            alunoId: Number(alunoId.value),
+            atividadeId: Number(atividadeId.value),
+            pontuacao: Number(pontuacao.value),
+            dataRealizacao: dataRealizacao.value || today()
+        };
+        await api('/api/progressos'+(id.value?'/'+id.value:''),{
+            method: id.value ? 'PUT' : 'POST',
+            body: JSON.stringify(obj)
+        });
+        limpar();
+        carregar();
+    };
+}
+
+limpar();
+carregar();
+</script>
+</body>
+</html>

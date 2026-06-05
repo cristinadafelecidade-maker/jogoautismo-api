@@ -1,0 +1,52 @@
+FRONTEND INTEGRADO AO BACKEND SPRING BOOT
+
+O que foi acrescentado:
+1. Interface web em src/main/resources/static
+   - login.html
+   - index.html
+   - criancas.html
+   - responsaveis.html
+   - educadores.html
+   - atividades.html
+   - jogos.html
+   - sessoes.html
+   - css/app.css
+   - js/api.js
+
+2. O login usa o endpoint já existente:
+   POST /api/auth/login
+
+3. Depois do login, o token JWT é guardado no localStorage e usado nas chamadas fetch/AJAX.
+
+4. As telas agora consomem a API REST:
+   - /api/alunos
+   - /api/encarregados
+   - /api/educadores
+   - /api/atividades
+   - /api/progressos
+
+5. O jogo em jogos.html calcula a pontuação e grava o resultado em /api/progressos.
+
+6. O SecurityConfig foi ajustado para permitir acesso aos ficheiros estáticos do frontend.
+
+Como rodar:
+1. Abrir o projeto no VS Code.
+2. Confirmar que o MySQL está ligado.
+3. Executar:
+   mvn spring-boot:run
+4. Abrir no navegador:
+   http://localhost:8080/login.html
+
+Credenciais de teste:
+ADMIN: admin@jogoautismo.mz / admin123
+EDUCADOR: fatima@escola.mz / admin123
+ENCARREGADO: maria@gmail.com / admin123
+ALUNO: nilton@aluno.mz / admin123
+
+Swagger continua disponível:
+http://localhost:8080/swagger-ui/index.html
+ou
+http://localhost:8080/swagger-ui.html
+
+Observação:
+No ambiente onde este ZIP foi gerado não havia Maven instalado, então não foi possível executar mvn package aqui. Mas as alterações foram feitas diretamente sobre o projeto que já compilava no teu computador.

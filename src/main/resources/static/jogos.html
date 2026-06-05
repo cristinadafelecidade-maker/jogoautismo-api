@@ -1,0 +1,2345 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mundo Colorido - Sistema Educativo para Crianças</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        secondary: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            800: '#854d0e',
+                            900: '#713f12',
+                        },
+                        accent: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        purple: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        pink: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
+                        }
+                    },
+                    fontFamily: {
+                        'nunito': ['Nunito', 'sans-serif'],
+                        'fredoka': ['Fredoka One', 'cursive'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'slide-down': 'slideDown 0.5s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite',
+                        'pulse-soft': 'pulseSoft 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'shimmer': 'shimmer 2s infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'rainbow': 'rainbow 3s linear infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        slideDown: {
+                            '0%': { transform: 'translateY(-20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.8' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' }
+                        },
+                        shimmer: {
+                            '0%': { 'background-position': '-1000px 0' },
+                            '100%': { 'background-position': '1000px 0' }
+                        },
+                        bounce: {
+                            '0%, 100%': { 
+                                transform: 'translateY(0)',
+                                animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)'
+                            },
+                            '50%': { 
+                                transform: 'translateY(-25%)',
+                                animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)'
+                            }
+                        },
+                        rainbow: {
+                            '0%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' },
+                            '100%': { 'background-position': '0% 50%' }
+                        }
+                    },
+                    backgroundImage: {
+                        'gradient-rainbow': 'linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080, #ff0000)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .screen {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .card {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            transition: all 0.3s ease;
+            border-radius: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(2, 132, 199, 0.4);
+        }
+        
+        .game-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+        
+        .game-option:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+        
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .rainbow-text {
+            background: linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080, #ff0000);
+            background-size: 1000% 1000%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 3s linear infinite;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-avatar:hover {
+            transform: scale(1.05);
+        }
+        
+        .activity-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .activity-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .welcome-message {
+            font-family: 'Fredoka One', cursive;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+            letter-spacing: 1px;
+        }
+        
+        .decorative-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .progress-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+        
+        .interactive-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .interactive-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .interactive-card:hover::after {
+            transform: translateX(100%);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-stack {
+                flex-direction: column;
+            }
+            
+            .mobile-full {
+                width: 100%;
+            }
+            
+            .mobile-p-4 {
+                padding: 1rem;
+            }
+            
+            .mobile-text-center {
+                text-align: center;
+            }
+            
+            .welcome-message {
+                font-size: 2rem !important;
+            }
+            
+            .activity-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+<script>
+(function(){
+  const token=localStorage.getItem('token');
+  const perfil=localStorage.getItem('perfil');
+  if(!token){ window.location.replace('/login.html'); return; }
+  if(perfil!=='ALUNO' && perfil!=='ADMIN'){ alert('Acesso negado. Apenas ALUNO pode executar actividades.'); window.location.replace('/login.html'); }
+})();
+</script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 text-gray-800 min-h-screen flex flex-col overflow-x-hidden">
+    <!-- Elementos decorativos de fundo -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="decorative-shape w-64 h-64 bg-blue-400 top-10 left-10 animate-pulse-soft"></div>
+        <div class="decorative-shape w-56 h-56 bg-purple-400 bottom-10 right-10 animate-pulse-soft delay-1000"></div>
+        <div class="decorative-shape w-48 h-48 bg-pink-400 top-1/3 right-1/4 animate-pulse-soft delay-2000"></div>
+        <div class="decorative-shape w-52 h-52 bg-yellow-400 bottom-1/3 left-1/4 animate-pulse-soft delay-3000"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-md shadow-md py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-palette text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-primary-700 font-fredoka">Mundo Colorido</h1>
+                    <p class="text-xs text-gray-600">Aprendizado Divertido</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button id="accessibility-btn" class="p-2 text-gray-600 hover:text-primary-500 transition-colors">
+                    <i class="fas fa-universal-access text-lg"></i>
+                </button>
+                <button id="help-btn" class="p-2 text-gray-600 hover:text-primary-500 transition-colors">
+                    <i class="fas fa-question-circle text-lg"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 container mx-auto px-4 py-8 relative z-10">
+        <!-- Tela de Login/Seleção de Perfil -->
+        <div id="login-screen" class="screen animate__animated animate__fadeIn">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12 animate-fade-in">
+                    <div class="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-primary-500 to-purple-500 rounded-full flex items-center justify-center shadow-xl floating-element">
+                        <i class="fas fa-child text-white text-5xl"></i>
+                    </div>
+                    <h2 class="text-4xl font-black text-primary-800 mb-4 welcome-message">Bem-vindo ao Mundo Colorido</h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Sistema educativo desenvolvido para apoiar o desenvolvimento de crianças</p>
+                </div>
+                
+                <div class="card bg-white p-8 mb-8 animate-slide-up">
+                    <h3 class="text-2xl font-bold text-primary-700 mb-6 text-center">Selecione um Perfil</h3>
+                    
+                    <div id="profiles-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Perfis serão carregados aqui -->
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <button id="manage-profiles-btn" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-users mr-2"></i> Gerenciar Perfis
+                        </button>
+                        <button id="guest-mode-btn" class="border border-primary-500 text-primary-500 font-semibold py-3 px-8 rounded-lg hover:bg-primary-50 transition-colors flex items-center justify-center">
+                            <i class="fas fa-user-clock mr-2"></i> Modo Convidado
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="text-center text-gray-500">
+                    <p>Para uma experiência personalizada, crie um perfil para cada criança</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Gestão de Perfis -->
+        <div id="profiles-screen" class="screen hidden">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-primary-700">Gestão de Perfis</h2>
+                    <button id="back-to-login" class="text-primary-500 hover:text-primary-700 font-medium flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Voltar
+                    </button>
+                </div>
+                
+                <div class="card bg-white p-6 mb-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <div>
+                            <p class="text-gray-600" id="profiles-count">0 de 25 perfis criados</p>
+                        </div>
+                        <button id="create-profile-btn" class="btn-primary text-white font-semibold py-3 px-6 rounded-lg flex items-center">
+                            <i class="fas fa-plus mr-2"></i> Criar Novo Perfil
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="profiles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Perfis serão carregados aqui -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Criação/Edição de Perfil -->
+        <div id="profile-form-screen" class="screen hidden">
+            <div class="max-w-2xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-primary-700" id="profile-form-title">Criar Novo Perfil</h2>
+                    <button id="cancel-profile-btn" class="text-primary-500 hover:text-primary-700 font-medium flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Cancelar
+                    </button>
+                </div>
+                
+                <div class="card bg-white p-8">
+                    <form id="profile-form" class="space-y-6">
+                        <div class="flex flex-col items-center mb-6">
+                            <div id="image-upload-container" class="relative w-32 h-32 mb-4 rounded-full border-2 border-dashed border-gray-300 flex items-center justify-center cursor-pointer hover:border-primary-500 transition-colors overflow-hidden">
+                                <div id="image-placeholder" class="text-center p-4">
+                                    <i class="fas fa-camera text-gray-400 text-2xl mb-2"></i>
+                                    <p class="text-gray-500 text-sm">Adicionar foto</p>
+                                </div>
+                                <img id="profile-image-preview" class="absolute inset-0 w-full h-full object-cover hidden" alt="Pré-visualização">
+                                <input type="file" id="profile-image" accept=".jpg,.jpeg,.png" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                            </div>
+                            <div id="image-error" class="text-red-500 text-sm hidden"></div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="profile-name" class="block text-sm font-medium text-gray-700 mb-2">Nome da Criança *</label>
+                                <input type="text" id="profile-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" required maxlength="50">
+                                <div id="name-error" class="text-red-500 text-sm mt-1 hidden"></div>
+                            </div>
+                            
+                            <div>
+                                <label for="profile-age" class="block text-sm font-medium text-gray-700 mb-2">Idade *</label>
+                                <input type="number" id="profile-age" min="3" max="12" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" required>
+                                <div id="age-error" class="text-red-500 text-sm mt-1 hidden"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="profile-interests" class="block text-sm font-medium text-gray-700 mb-2">Interesses</label>
+                            <textarea id="profile-interests" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" rows="2" placeholder="Ex: cores, animais, números..." maxlength="200"></textarea>
+                        </div>
+                        
+                        <div>
+                            <label for="profile-notes" class="block text-sm font-medium text-gray-700 mb-2">Observações</label>
+                            <textarea id="profile-notes" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors" rows="3" placeholder="Observações importantes sobre a criança..." maxlength="500"></textarea>
+                        </div>
+                        
+                        <div class="flex justify-end space-x-4 pt-4">
+                            <button type="button" id="cancel-profile-form-btn" class="px-6 py-3 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg">
+                                Salvar Perfil
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela Principal (MAIN-SCREEN) -->
+        <div id="main-screen" class="screen hidden animate__animated animate__fadeIn">
+            <div class="max-w-7xl mx-auto">
+                <!-- Cabeçalho da tela principal -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="profile-avatar bg-gradient-to-br from-primary-400 to-purple-500 flex items-center justify-center text-white text-4xl font-bold shadow-xl">
+                            <span id="profile-avatar-text">U</span>
+                        </div>
+                        <div>
+                            <h2 class="text-4xl font-black text-primary-800 welcome-message" id="welcome-message">Bem-vindo!</h2>
+                            <p class="text-gray-600 text-lg" id="profile-info">Vamos aprender de forma divertida!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button id="switch-profile-btn" class="btn-primary text-white font-bold py-3 px-6 rounded-lg flex items-center gap-2">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Trocar Perfil</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Barra de progresso -->
+                <div class="mb-8">
+                    <div class="flex justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-700">Progresso do dia</span>
+                        <span class="text-sm font-bold text-primary-600" id="daily-progress">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div id="daily-progress-bar" class="bg-gradient-to-r from-primary-500 to-accent-500 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <!-- Atividades Educativas -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold text-primary-700 mb-6 flex items-center gap-3">
+                        <i class="fas fa-star text-yellow-500"></i>
+                        Atividades Educativas
+                    </h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <!-- Cores -->
+                        <div class="game-option interactive-card card p-6 flex flex-col items-center text-center bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-200">
+                            <div class="activity-icon bg-gradient-to-br from-blue-500 to-cyan-500 text-white mb-4">
+                                🎨
+                            </div>
+                            <h4 class="text-xl font-bold text-blue-800 mb-2">Cores</h4>
+                            <p class="text-gray-600 text-sm mb-4">3 fases de dificuldade</p>
+                            <button class="mt-auto btn-primary text-white font-medium py-2.5 px-5 rounded-lg w-full" data-game="colors">
+                                <i class="fas fa-play mr-2"></i> Iniciar
+                            </button>
+                            <div class="progress-badge bg-blue-500 text-white" id="colors-progress">0%</div>
+                        </div>
+                        
+                        <!-- Números -->
+                        <div class="game-option interactive-card card p-6 flex flex-col items-center text-center bg-gradient-to-br from-yellow-50 to-yellow-100 border-2 border-yellow-200">
+                            <div class="activity-icon bg-gradient-to-br from-yellow-500 to-orange-500 text-white mb-4">
+                                🔢
+                            </div>
+                            <h4 class="text-xl font-bold text-yellow-800 mb-2">Números</h4>
+                            <p class="text-gray-600 text-sm mb-4">3 fases de dificuldade</p>
+                            <button class="mt-auto btn-secondary text-white font-medium py-2.5 px-5 rounded-lg w-full" data-game="numbers">
+                                <i class="fas fa-play mr-2"></i> Iniciar
+                            </button>
+                            <div class="progress-badge bg-yellow-500 text-white" id="numbers-progress">0%</div>
+                        </div>
+                        
+                        <!-- Letras -->
+                        <div class="game-option interactive-card card p-6 flex flex-col items-center text-center bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-200">
+                            <div class="activity-icon bg-gradient-to-br from-green-500 to-emerald-500 text-white mb-4">
+                                🔠
+                            </div>
+                            <h4 class="text-xl font-bold text-green-800 mb-2">Letras</h4>
+                            <p class="text-gray-600 text-sm mb-4">3 fases de dificuldade</p>
+                            <button class="mt-auto bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white font-medium py-2.5 px-5 rounded-lg w-full transition-all" data-game="letters">
+                                <i class="fas fa-play mr-2"></i> Iniciar
+                            </button>
+                            <div class="progress-badge bg-green-500 text-white" id="letters-progress">0%</div>
+                        </div>
+                        
+                        <!-- Formas -->
+                        <div class="game-option interactive-card card p-6 flex flex-col items-center text-center bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-200">
+                            <div class="activity-icon bg-gradient-to-br from-purple-500 to-pink-500 text-white mb-4">
+                                🔺
+                            </div>
+                            <h4 class="text-xl font-bold text-purple-800 mb-2">Formas</h4>
+                            <p class="text-gray-600 text-sm mb-4">3 fases de dificuldade</p>
+                            <button class="mt-auto bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-medium py-2.5 px-5 rounded-lg w-full transition-all" data-game="shapes">
+                                <i class="fas fa-play mr-2"></i> Iniciar
+                            </button>
+                            <div class="progress-badge bg-purple-500 text-white" id="shapes-progress">0%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Linha inferior com informações -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Configurações Rápidas -->
+                    <div class="card bg-white p-6">
+                        <h3 class="text-xl font-bold text-primary-700 mb-4 flex items-center gap-2">
+                            <i class="fas fa-cogs text-gray-600"></i>
+                            Configurações Rápidas
+                        </h3>
+                        <div class="space-y-3">
+                            <button id="learning-settings-btn" class="w-full text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-brain"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Aprendizagem</p>
+                                        <p class="text-sm text-gray-600">Ajuste dificuldade</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </button>
+                            
+                            <button id="reports-btn" class="w-full text-left p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-teal-500 rounded-lg flex items-center justify-center text-white mr-3">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Relatórios</p>
+                                        <p class="text-sm text-gray-600">Acompanhe progresso</p>
+                                    </div>
+                                </div>
+                                <i class="fas fa-chevron-right text-gray-400"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Progresso Recente -->
+                    <div class="card bg-white p-6">
+                        <h3 class="text-xl font-bold text-primary-700 mb-4">Progresso Recente</h3>
+                        <div id="recent-progress" class="space-y-3">
+                            <div class="text-center py-8 text-gray-500">
+                                <i class="fas fa-chart-line text-3xl mb-2"></i>
+                                <p>Nenhum progresso registrado</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Próximas Atividades -->
+                    <div class="card bg-gradient-to-br from-primary-500 to-primary-600 p-6 text-white">
+                        <h3 class="text-xl font-bold mb-4">Próximas Atividades</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 p-3 bg-white/20 rounded-lg">
+                                <div class="text-center">
+                                    <div class="text-lg font-bold">15</div>
+                                    <div class="text-xs opacity-80">min</div>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Cores Básicas</p>
+                                    <p class="text-sm opacity-90">Vermelho, Azul, Amarelo</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white/20 rounded-lg">
+                                <div class="text-center">
+                                    <div class="text-lg font-bold">20</div>
+                                    <div class="text-xs opacity-80">min</div>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Contar até 10</p>
+                                    <p class="text-sm opacity-90">Números e objetos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Configurações de Aprendizagem -->
+        <div id="settings-screen" class="screen hidden">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-primary-700">Configurações de Aprendizagem</h2>
+                    <button id="back-to-main" class="text-primary-500 hover:text-primary-700 font-medium flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Voltar
+                    </button>
+                </div>
+                
+                <div class="card bg-white p-8">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold text-primary-700 mb-2" id="settings-profile-name">Configurações para: [Nome do Perfil]</h3>
+                        <p class="text-gray-600">Personalize a experiência de aprendizagem</p>
+                    </div>
+                    
+                    <div class="space-y-8">
+                        <div>
+                            <h4 class="text-lg font-medium text-primary-700 mb-4">Nível de Dificuldade</h4>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-sm text-gray-500 w-20">Fácil</span>
+                                <div class="flex-1">
+                                    <input type="range" id="difficulty-level" min="1" max="5" value="3" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+                                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                        <span>1</span>
+                                        <span>2</span>
+                                        <span>3</span>
+                                        <span>4</span>
+                                        <span>5</span>
+                                    </div>
+                                </div>
+                                <span class="text-sm text-gray-500 w-20">Difícil</span>
+                            </div>
+                            <div class="text-center mt-2">
+                                <span id="difficulty-text" class="font-medium text-primary-600">Nível 3 - Médio</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-lg font-medium text-primary-700 mb-4">Atividades Disponíveis</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <input type="checkbox" name="activities" value="colors" class="mt-1 mr-3 h-5 w-5 text-primary-500 rounded focus:ring-primary-500" checked>
+                                    <div>
+                                        <span class="font-medium text-gray-800">Cores</span>
+                                        <p class="text-sm text-gray-600 mt-1">Reconhecimento de cores</p>
+                                    </div>
+                                </label>
+                                <label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors">
+                                    <input type="checkbox" name="activities" value="numbers" class="mt-1 mr-3 h-5 w-5 text-primary-500 rounded focus:ring-primary-500" checked>
+                                    <div>
+                                        <span class="font-medium text-gray-800">Números</span>
+                                        <p class="text-sm text-gray-600 mt-1">Contagem numérica</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <input type="checkbox" id="sound-effects" class="h-5 w-5 text-primary-500 rounded focus:ring-primary-500 mr-3" checked>
+                            <label for="sound-effects" class="text-gray-700">Efeitos sonoros</label>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-end pt-6">
+                        <button id="save-settings" class="btn-primary text-white font-semibold py-3 px-8 rounded-lg">
+                            Salvar Configurações
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Seleção de Fase -->
+        <div id="level-select-screen" class="screen hidden">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-primary-700" id="level-select-title">Selecionar Fase</h2>
+                    <button id="back-to-main-from-levels" class="text-primary-500 hover:text-primary-700 font-medium flex items-center">
+                        <i class="fas fa-arrow-left mr-2"></i> Voltar
+                    </button>
+                </div>
+                
+                <div class="card bg-white p-8">
+                    <div id="level-select-content" class="flex flex-col items-center">
+                        <!-- Conteúdo será carregado aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela de Jogo -->
+        <div id="game-screen" class="screen hidden">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h2 class="text-3xl font-bold text-primary-700" id="game-title">Jogo</h2>
+                        <div class="flex items-center gap-4 mt-2">
+                            <div class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium" id="game-phase">Fase 1</div>
+                            <p class="text-gray-600" id="game-instruction">Instruções do jogo</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-primary-50 text-primary-700 font-medium py-2 px-4 rounded-lg">
+                            <i class="fas fa-star mr-2"></i>
+                            <span id="game-score">0</span>
+                        </div>
+                        <button id="exit-game-btn" class="text-primary-500 hover:text-primary-700 font-medium flex items-center">
+                            <i class="fas fa-times mr-2"></i> Sair
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card bg-white p-8">
+                    <div id="game-content" class="flex flex-col items-center">
+                        <!-- Conteúdo do jogo será carregado aqui -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <div class="w-6 h-6 bg-primary-500 rounded flex items-center justify-center">
+                        <i class="fas fa-palette text-white text-xs"></i>
+                    </div>
+                    <span class="text-gray-700 font-medium">Mundo Colorido</span>
+                </div>
+                <div class="text-gray-500 text-sm">
+                    &copy; 2025 Sistema Educativo para Crianças. Todos os direitos reservados.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal de Confirmação -->
+    <div id="confirmation-modal" class="fixed inset-0 z-50 hidden">
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="card bg-white rounded-2xl p-6 w-full max-w-md z-10">
+                <h3 class="text-xl font-semibold text-primary-700 mb-2" id="modal-title">Confirmar ação</h3>
+                <p class="text-gray-600 mb-6" id="modal-message">Tem certeza que deseja prosseguir?</p>
+                <div class="flex justify-end space-x-3">
+                    <button id="modal-cancel" class="px-4 py-2 border border-gray-300 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors">
+                        Cancelar
+                    </button>
+                    <button id="modal-confirm" class="btn-primary text-white font-semibold py-2 px-6 rounded-lg">
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de Notificação -->
+    <div id="toast" class="fixed bottom-4 right-4 z-50 hidden">
+        <div class="card bg-white rounded-lg p-4 shadow-lg border-l-4 border-green-500 max-w-sm">
+            <div class="flex items-center">
+                <i class="fas fa-check-circle text-green-500 mr-3"></i>
+                <div>
+                    <p class="font-medium text-gray-800" id="toast-message">Operação realizada com sucesso</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sistema de Gerenciamento de Estado
+        const AppState = {
+            currentScreen: 'login',
+            currentProfile: null,
+            currentGame: null,
+            currentPhase: 1,
+            currentLevel: 1,
+            profiles: JSON.parse(localStorage.getItem('profiles')) || [],
+            gameProgress: JSON.parse(localStorage.getItem('gameProgress')) || {},
+            settings: JSON.parse(localStorage.getItem('settings')) || {
+                sound: true,
+                highContrast: false,
+                autoSave: true
+            }
+        };
+
+        // Inicialização da Aplicação
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupEventListeners();
+            loadProfiles();
+            createFloatingParticles();
+        });
+
+        function initializeApp() {
+            // Aplicar configurações salvas
+            applySettings();
+            
+            // Mostrar tela inicial
+            showScreen('login');
+        }
+
+        function setupEventListeners() {
+            // Navegação principal
+            document.getElementById('manage-profiles-btn').addEventListener('click', () => showScreen('profiles'));
+            document.getElementById('back-to-login').addEventListener('click', () => showScreen('login'));
+            document.getElementById('guest-mode-btn').addEventListener('click', startGuestMode);
+            document.getElementById('create-profile-btn').addEventListener('click', createNewProfile);
+            document.getElementById('cancel-profile-btn').addEventListener('click', () => showScreen('profiles'));
+            document.getElementById('cancel-profile-form-btn').addEventListener('click', () => showScreen('profiles'));
+            document.getElementById('switch-profile-btn').addEventListener('click', () => showScreen('login'));
+            document.getElementById('back-to-main').addEventListener('click', () => showScreen('main'));
+            document.getElementById('back-to-main-from-levels').addEventListener('click', () => showScreen('main'));
+            document.getElementById('learning-settings-btn').addEventListener('click', () => showScreen('settings'));
+            document.getElementById('reports-btn').addEventListener('click', showReports);
+            document.getElementById('exit-game-btn').addEventListener('click', exitGame);
+            
+            // Formulário de perfil
+            document.getElementById('profile-form').addEventListener('submit', saveProfile);
+            
+            // Configurações
+            document.getElementById('difficulty-level').addEventListener('input', updateDifficultyText);
+            document.getElementById('save-settings').addEventListener('click', saveSettings);
+            
+            // Jogos
+            document.querySelectorAll('[data-game]').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const gameType = this.getAttribute('data-game');
+                    showLevelSelect(gameType);
+                });
+            });
+            
+            // Modal
+            document.getElementById('modal-cancel').addEventListener('click', closeModal);
+            document.getElementById('modal-confirm').addEventListener('click', executeModalAction);
+            
+            // Upload de imagem
+            setupImageUpload();
+            
+            // Acessibilidade
+            document.getElementById('accessibility-btn').addEventListener('click', toggleAccessibility);
+            document.getElementById('help-btn').addEventListener('click', showHelp);
+        }
+
+        // Sistema de Navegação entre Telas
+        function showScreen(screenName) {
+            // Esconder todas as telas
+            document.querySelectorAll('.screen').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            
+            // Mostrar tela solicitada
+            document.getElementById(`${screenName}-screen`).classList.remove('hidden');
+            AppState.currentScreen = screenName;
+            
+            // Executar ações específicas para cada tela
+            switch(screenName) {
+                case 'profiles':
+                    updateProfilesList();
+                    break;
+                case 'main':
+                    updateMainScreen();
+                    break;
+                case 'settings':
+                    updateSettingsScreen();
+                    break;
+            }
+        }
+
+        // Sistema de Gestão de Perfis
+        function loadProfiles() {
+            AppState.profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+            updateProfilesList();
+        }
+
+        function updateProfilesList() {
+            const profilesList = document.getElementById('profiles-list');
+            const profilesContainer = document.getElementById('profiles-container');
+            const profilesCount = document.getElementById('profiles-count');
+            
+            profilesCount.textContent = `${AppState.profiles.length} de 25 perfis criados`;
+            
+            // Tela de login - lista simplificada
+            if (profilesList) {
+                profilesList.innerHTML = '';
+                
+                if (AppState.profiles.length === 0) {
+                    profilesList.innerHTML = `
+                        <div class="col-span-3 text-center py-12">
+                            <i class="fas fa-users text-5xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Nenhum perfil criado</h3>
+                            <p class="text-gray-500">Crie o primeiro perfil para começar</p>
+                        </div>
+                    `;
+                } else {
+                    AppState.profiles.forEach(profile => {
+                        const profileCard = createProfileCard(profile, false);
+                        profilesList.appendChild(profileCard);
+                    });
+                }
+            }
+            
+            // Tela de gestão - lista completa
+            if (profilesContainer) {
+                profilesContainer.innerHTML = '';
+                
+                if (AppState.profiles.length === 0) {
+                    profilesContainer.innerHTML = `
+                        <div class="col-span-3 text-center py-12">
+                            <i class="fas fa-users text-5xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Nenhum perfil criado</h3>
+                            <p class="text-gray-500">Clique em "Criar Novo Perfil" para adicionar o primeiro perfil</p>
+                        </div>
+                    `;
+                } else {
+                    AppState.profiles.forEach(profile => {
+                        const profileCard = createProfileCard(profile, true);
+                        profilesContainer.appendChild(profileCard);
+                    });
+                }
+            }
+        }
+
+        function createProfileCard(profile, showActions = false) {
+            const card = document.createElement('div');
+            card.className = 'card bg-white rounded-xl p-6 flex flex-col items-center text-center hover:shadow-xl transition-all duration-300';
+            
+            let actionsHTML = '';
+            if (showActions) {
+                actionsHTML = `
+                    <div class="flex space-x-2 mt-4">
+                        <button class="edit-profile-btn bg-primary-500 hover:bg-primary-600 text-white p-2 rounded-full transition-colors" data-id="${profile.id}">
+                            <i class="fas fa-edit text-sm"></i>
+                        </button>
+                        <button class="delete-profile-btn bg-red-500 hover:bg-red-600 text-white p-2 rounded-full transition-colors" data-id="${profile.id}">
+                            <i class="fas fa-trash text-sm"></i>
+                        </button>
+                    </div>
+                `;
+            } else {
+                actionsHTML = `
+                    <button class="select-profile-btn btn-primary text-white font-medium py-2 px-6 rounded-lg mt-4 w-full" data-id="${profile.id}">
+                        Selecionar
+                    </button>
+                `;
+            }
+            
+            card.innerHTML = `
+                <div class="w-20 h-20 rounded-full bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center text-primary-500 text-2xl mb-4 overflow-hidden">
+                    ${profile.photo ? 
+                        `<img src="${profile.photo}" alt="${profile.name}" class="w-full h-full object-cover">` : 
+                        `<i class="fas fa-user"></i>`
+                    }
+                </div>
+                <h3 class="text-lg font-semibold text-primary-700 mb-1">${profile.name}</h3>
+                <p class="text-gray-600 mb-2">${profile.age} anos</p>
+                ${profile.interests ? `<p class="text-sm text-gray-500">${profile.interests}</p>` : ''}
+                ${actionsHTML}
+            `;
+            
+            // Adicionar event listeners
+            if (showActions) {
+                card.querySelector('.edit-profile-btn').addEventListener('click', function() {
+                    editProfile(this.getAttribute('data-id'));
+                });
+                card.querySelector('.delete-profile-btn').addEventListener('click', function() {
+                    confirmDeleteProfile(this.getAttribute('data-id'));
+                });
+            } else {
+                card.querySelector('.select-profile-btn').addEventListener('click', function() {
+                    selectProfile(this.getAttribute('data-id'));
+                });
+            }
+            
+            return card;
+        }
+
+        function createNewProfile() {
+            document.getElementById('profile-form-title').textContent = 'Criar Novo Perfil';
+            document.getElementById('profile-form').reset();
+            document.getElementById('profile-image-preview').classList.add('hidden');
+            document.getElementById('image-placeholder').classList.remove('hidden');
+            document.getElementById('profile-form').removeAttribute('data-profile-id');
+            clearFormErrors();
+            showScreen('profile-form');
+        }
+
+        function editProfile(profileId) {
+            const profile = AppState.profiles.find(p => p.id === profileId);
+            if (!profile) return;
+            
+            document.getElementById('profile-form-title').textContent = 'Editar Perfil';
+            document.getElementById('profile-name').value = profile.name;
+            document.getElementById('profile-age').value = profile.age;
+            document.getElementById('profile-interests').value = profile.interests || '';
+            document.getElementById('profile-notes').value = profile.notes || '';
+            
+            if (profile.photo) {
+                document.getElementById('profile-image-preview').src = profile.photo;
+                document.getElementById('profile-image-preview').classList.remove('hidden');
+                document.getElementById('image-placeholder').classList.add('hidden');
+            } else {
+                document.getElementById('profile-image-preview').classList.add('hidden');
+                document.getElementById('image-placeholder').classList.remove('hidden');
+            }
+            
+            document.getElementById('profile-form').setAttribute('data-profile-id', profileId);
+            clearFormErrors();
+            showScreen('profile-form');
+        }
+
+        function saveProfile(e) {
+            e.preventDefault();
+            
+            const profileId = document.getElementById('profile-form').getAttribute('data-profile-id');
+            const name = document.getElementById('profile-name').value.trim();
+            const age = parseInt(document.getElementById('profile-age').value);
+            const interests = document.getElementById('profile-interests').value.trim();
+            const notes = document.getElementById('profile-notes').value.trim();
+            const photo = document.getElementById('profile-image-preview').src;
+            
+            // Validação
+            let isValid = true;
+            clearFormErrors();
+            
+            if (!name) {
+                showFormError('name-error', 'O nome é obrigatório.');
+                isValid = false;
+            }
+            
+            if (!age || age < 3 || age > 12) {
+                showFormError('age-error', 'A idade deve estar entre 3 e 12 anos.');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Salvar perfil
+            if (profileId) {
+                // Editar perfil existente
+                const profileIndex = AppState.profiles.findIndex(p => p.id === profileId);
+                if (profileIndex !== -1) {
+                    AppState.profiles[profileIndex] = {
+                        ...AppState.profiles[profileIndex],
+                        name,
+                        age,
+                        interests,
+                        notes,
+                        photo: photo.includes('data:image') ? photo : AppState.profiles[profileIndex].photo,
+                        updatedAt: new Date().toISOString()
+                    };
+                }
+            } else {
+                // Criar novo perfil
+                const newProfile = {
+                    id: generateId(),
+                    name,
+                    age,
+                    interests,
+                    notes,
+                    photo: photo.includes('data:image') ? photo : null,
+                    createdAt: new Date().toISOString(),
+                    settings: {
+                        difficulty: 3,
+                        activities: ['colors', 'numbers', 'letters'],
+                        sessionTime: 30
+                    }
+                };
+                
+                AppState.profiles.push(newProfile);
+            }
+            
+            localStorage.setItem('profiles', JSON.stringify(AppState.profiles));
+            
+            updateProfilesList();
+            showScreen('profiles');
+            showToast(profileId ? 'Perfil atualizado com sucesso!' : 'Perfil criado com sucesso!');
+        }
+
+        function confirmDeleteProfile(profileId) {
+            const profile = AppState.profiles.find(p => p.id === profileId);
+            if (!profile) return;
+            
+            showModal(
+                'Confirmar Exclusão',
+                `Tem certeza que deseja excluir o perfil de ${profile.name}? Esta ação não pode ser desfeita.`,
+                () => deleteProfile(profileId)
+            );
+        }
+
+        function deleteProfile(profileId) {
+            const profileIndex = AppState.profiles.findIndex(p => p.id === profileId);
+            if (profileIndex === -1) return;
+            
+            AppState.profiles.splice(profileIndex, 1);
+            localStorage.setItem('profiles', JSON.stringify(AppState.profiles));
+            
+            updateProfilesList();
+            closeModal();
+            showToast('Perfil excluído com sucesso!');
+        }
+
+        function selectProfile(profileId) {
+            AppState.currentProfile = AppState.profiles.find(p => p.id === profileId);
+            if (!AppState.currentProfile) return;
+            
+            showScreen('main');
+        }
+
+        function startGuestMode() {
+            AppState.currentProfile = null;
+            showScreen('main');
+        }
+
+        function updateMainScreen() {
+            if (AppState.currentProfile) {
+                document.getElementById('welcome-message').textContent = `Olá, ${AppState.currentProfile.name}!`;
+                document.getElementById('profile-info').textContent = `${AppState.currentProfile.age} anos • Vamos aprender!`;
+                document.getElementById('profile-avatar-text').textContent = AppState.currentProfile.name.charAt(0).toUpperCase();
+                document.getElementById('settings-profile-name').textContent = `Configurações para: ${AppState.currentProfile.name}`;
+            } else {
+                document.getElementById('welcome-message').textContent = 'Modo Convidado';
+                document.getElementById('profile-info').textContent = 'Explore as atividades educativas';
+                document.getElementById('profile-avatar-text').textContent = '👤';
+                document.getElementById('settings-profile-name').textContent = 'Configurações Gerais';
+            }
+            
+            updateProgressBars();
+            updateRecentProgress();
+        }
+
+        function updateProgressBars() {
+            if (!AppState.currentProfile || !AppState.gameProgress[AppState.currentProfile.id]) {
+                // Reset all progress bars
+                ['colors', 'numbers', 'letters', 'shapes'].forEach(game => {
+                    const progressElement = document.getElementById(`${game}-progress`);
+                    if (progressElement) {
+                        progressElement.textContent = `0%`;
+                    }
+                });
+                
+                document.getElementById('daily-progress').textContent = `0%`;
+                document.getElementById('daily-progress-bar').style.width = `0%`;
+                return;
+            }
+            
+            const progress = AppState.gameProgress[AppState.currentProfile.id];
+            let totalProgress = 0;
+            let gameCount = 0;
+            
+            // Calcular progresso para cada jogo
+            ['colors', 'numbers', 'letters', 'shapes'].forEach(game => {
+                const gameData = progress[game];
+                let progressPercent = 0;
+                
+                if (gameData) {
+                    // Calcular progresso baseado no nível alcançado
+                    progressPercent = Math.min(100, (gameData.level || 1) * 33);
+                    totalProgress += progressPercent;
+                    gameCount++;
+                }
+                
+                const progressElement = document.getElementById(`${game}-progress`);
+                if (progressElement) {
+                    progressElement.textContent = `${Math.round(progressPercent)}%`;
+                }
+            });
+            
+            // Atualizar progresso diário
+            const dailyProgress = gameCount > 0 ? Math.round(totalProgress / gameCount) : 0;
+            document.getElementById('daily-progress').textContent = `${dailyProgress}%`;
+            
+            const progressBar = document.getElementById('daily-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = `${dailyProgress}%`;
+            }
+        }
+
+        function updateRecentProgress() {
+            const recentProgress = document.getElementById('recent-progress');
+            
+            if (!AppState.currentProfile || !AppState.gameProgress[AppState.currentProfile.id]) {
+                recentProgress.innerHTML = `
+                    <div class="text-center py-4 text-gray-500">
+                        <i class="fas fa-chart-line text-2xl mb-2"></i>
+                        <p>Nenhum progresso registrado</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            const progress = AppState.gameProgress[AppState.currentProfile.id];
+            let progressHTML = '';
+            let count = 0;
+            
+            Object.entries(progress).forEach(([game, data]) => {
+                if (count >= 3) return;
+                
+                const gameTitle = getGameTitle(game);
+                const date = new Date(data.date).toLocaleDateString('pt-PT');
+                const level = data.level || 1;
+                
+                progressHTML += `
+                    <div class="flex justify-between items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
+                        <div>
+                            <h4 class="font-medium text-gray-800">${gameTitle}</h4>
+                            <p class="text-sm text-gray-500">Fase ${level} • ${date}</p>
+                        </div>
+                        <div class="text-accent-600 font-semibold">${data.score || 0} pts</div>
+                    </div>
+                `;
+                count++;
+            });
+            
+            recentProgress.innerHTML = progressHTML || `
+                <div class="text-center py-4 text-gray-500">
+                    <i class="fas fa-chart-line text-2xl mb-2"></i>
+                    <p>Nenhum progresso registrado</p>
+                </div>
+            `;
+        }
+
+        function updateSettingsScreen() {
+            if (AppState.currentProfile) {
+                const settings = AppState.currentProfile.settings || {
+                    difficulty: 3,
+                    activities: ['colors', 'numbers', 'letters'],
+                    sessionTime: 30
+                };
+                
+                document.getElementById('difficulty-level').value = settings.difficulty;
+                updateDifficultyText();
+                
+                // Marcar checkboxes baseado nas atividades
+                document.querySelectorAll('input[name="activities"]').forEach(checkbox => {
+                    checkbox.checked = settings.activities.includes(checkbox.value);
+                });
+            }
+        }
+
+        // Sistema de Seleção de Fase
+        function showLevelSelect(gameType) {
+            AppState.currentGame = gameType;
+            
+            const gameTitle = getGameTitle(gameType);
+            document.getElementById('level-select-title').textContent = `${gameTitle} - Selecione a Fase`;
+            
+            const levelSelectContent = document.getElementById('level-select-content');
+            
+            // Obter progresso atual do jogo
+            let currentLevel = 1;
+            if (AppState.currentProfile && AppState.gameProgress[AppState.currentProfile.id]) {
+                const progress = AppState.gameProgress[AppState.currentProfile.id][gameType];
+                if (progress && progress.level) {
+                    currentLevel = Math.min(3, progress.level + 1); // Pode acessar o próximo nível
+                }
+            }
+            
+            levelSelectContent.innerHTML = `
+                <div class="text-center mb-8">
+                    <div class="text-5xl mb-4">${getGameEmoji(gameType)}</div>
+                    <p class="text-gray-600 mb-6">Cada fase aumenta a dificuldade. Complete uma fase para desbloquear a próxima!</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-3xl">
+                    <!-- Fase 1 -->
+                    <div class="level-card card p-6 flex flex-col items-center text-center ${currentLevel >= 1 ? 'bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 cursor-pointer' : 'bg-gray-100 border-2 border-gray-200'}">
+                        <div class="w-16 h-16 rounded-full ${currentLevel >= 1 ? 'bg-green-500' : 'bg-gray-400'} flex items-center justify-center text-white text-2xl mb-4">
+                            1
+                        </div>
+                        <h4 class="text-xl font-bold ${currentLevel >= 1 ? 'text-green-800' : 'text-gray-600'} mb-2">Fase 1</h4>
+                        <p class="text-sm ${currentLevel >= 1 ? 'text-gray-600' : 'text-gray-500'} mb-4">${getLevelDescription(gameType, 1)}</p>
+                        ${currentLevel >= 1 ? 
+                            `<button class="mt-auto btn-primary text-white font-medium py-2.5 px-5 rounded-lg w-full start-level-btn" data-level="1">
+                                <i class="fas fa-play mr-2"></i> Jogar
+                            </button>` : 
+                            `<div class="mt-auto px-4 py-2.5 bg-gray-300 text-gray-600 rounded-lg w-full text-center">
+                                <i class="fas fa-lock mr-2"></i> Bloqueado
+                            </div>`
+                        }
+                    </div>
+                    
+                    <!-- Fase 2 -->
+                    <div class="level-card card p-6 flex flex-col items-center text-center ${currentLevel >= 2 ? 'bg-gradient-to-br from-yellow-50 to-orange-50 border-2 border-yellow-200 cursor-pointer' : 'bg-gray-100 border-2 border-gray-200'}">
+                        <div class="w-16 h-16 rounded-full ${currentLevel >= 2 ? 'bg-yellow-500' : 'bg-gray-400'} flex items-center justify-center text-white text-2xl mb-4">
+                            2
+                        </div>
+                        <h4 class="text-xl font-bold ${currentLevel >= 2 ? 'text-yellow-800' : 'text-gray-600'} mb-2">Fase 2</h4>
+                        <p class="text-sm ${currentLevel >= 2 ? 'text-gray-600' : 'text-gray-500'} mb-4">${getLevelDescription(gameType, 2)}</p>
+                        ${currentLevel >= 2 ? 
+                            `<button class="mt-auto btn-secondary text-white font-medium py-2.5 px-5 rounded-lg w-full start-level-btn" data-level="2">
+                                <i class="fas fa-play mr-2"></i> Jogar
+                            </button>` : 
+                            `<div class="mt-auto px-4 py-2.5 bg-gray-300 text-gray-600 rounded-lg w-full text-center">
+                                <i class="fas fa-lock mr-2"></i> Complete a Fase 1
+                            </div>`
+                        }
+                    </div>
+                    
+                    <!-- Fase 3 -->
+                    <div class="level-card card p-6 flex flex-col items-center text-center ${currentLevel >= 3 ? 'bg-gradient-to-br from-red-50 to-pink-50 border-2 border-red-200 cursor-pointer' : 'bg-gray-100 border-2 border-gray-200'}">
+                        <div class="w-16 h-16 rounded-full ${currentLevel >= 3 ? 'bg-red-500' : 'bg-gray-400'} flex items-center justify-center text-white text-2xl mb-4">
+                            3
+                        </div>
+                        <h4 class="text-xl font-bold ${currentLevel >= 3 ? 'text-red-800' : 'text-gray-600'} mb-2">Fase 3</h4>
+                        <p class="text-sm ${currentLevel >= 3 ? 'text-gray-600' : 'text-gray-500'} mb-4">${getLevelDescription(gameType, 3)}</p>
+                        ${currentLevel >= 3 ? 
+                            `<button class="mt-auto bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-medium py-2.5 px-5 rounded-lg w-full transition-all start-level-btn" data-level="3">
+                                <i class="fas fa-play mr-2"></i> Jogar
+                            </button>` : 
+                            `<div class="mt-auto px-4 py-2.5 bg-gray-300 text-gray-600 rounded-lg w-full text-center">
+                                <i class="fas fa-lock mr-2"></i> Complete a Fase 2
+                            </div>`
+                        }
+                    </div>
+                </div>
+            `;
+            
+            // Adicionar event listeners aos botões de fase
+            levelSelectContent.querySelectorAll('.start-level-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const level = parseInt(this.getAttribute('data-level'));
+                    startGame(gameType, level);
+                });
+            });
+            
+            showScreen('level-select');
+        }
+
+        function getGameEmoji(gameType) {
+            const emojis = {
+                'colors': '🎨',
+                'numbers': '🔢',
+                'letters': '🔠',
+                'shapes': '🔺'
+            };
+            return emojis[gameType] || '🎮';
+        }
+
+        function getLevelDescription(gameType, level) {
+            const descriptions = {
+                'colors': {
+                    1: 'Cores básicas (6 cores)',
+                    2: 'Mais cores (9 cores)',
+                    3: 'Cores e tons (12 cores)'
+                },
+                'numbers': {
+                    1: 'Números até 6',
+                    2: 'Números até 10',
+                    3: 'Números até 15'
+                },
+                'letters': {
+                    1: 'Letras A-F',
+                    2: 'Letras G-L',
+                    3: 'Letras M-R'
+                },
+                'shapes': {
+                    1: 'Formas básicas',
+                    2: 'Formas complexas',
+                    3: 'Formas e padrões'
+                }
+            };
+            
+            return descriptions[gameType] ? descriptions[gameType][level] : `Fase ${level}`;
+        }
+
+        // Sistema de Jogos com Fases
+        function startGame(gameType, level) {
+            AppState.currentGame = gameType;
+            AppState.currentLevel = level;
+            AppState.currentPhase = 1;
+            
+            // Configurar tela do jogo
+            document.getElementById('game-title').textContent = getGameTitle(gameType);
+            document.getElementById('game-phase').textContent = `Fase ${level}`;
+            document.getElementById('game-instruction').textContent = getLevelInstruction(gameType, level);
+            document.getElementById('game-score').textContent = '0';
+            
+            // Inicializar jogo
+            initGame(gameType, level);
+            
+            showScreen('game');
+        }
+
+        function initGame(gameType, level) {
+            const gameContent = document.getElementById('game-content');
+            gameContent.innerHTML = '';
+            
+            switch(gameType) {
+                case 'colors':
+                    initColorsGame(level);
+                    break;
+                case 'numbers':
+                    initNumbersGame(level);
+                    break;
+                case 'letters':
+                    initLettersGame(level);
+                    break;
+                case 'shapes':
+                    initShapesGame(level);
+                    break;
+                default:
+                    gameContent.innerHTML = `
+                        <div class="text-center py-12">
+                            <i class="fas fa-gamepad text-5xl text-gray-300 mb-4"></i>
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Jogo em desenvolvimento</h3>
+                            <p class="text-gray-500">Esta atividade estará disponível em breve</p>
+                        </div>
+                    `;
+            }
+        }
+
+        function initColorsGame(level) {
+            const gameContent = document.getElementById('game-content');
+            
+            // Configurações por nível
+            const levelConfig = {
+                1: { colors: 6, time: 3000, scoreMultiplier: 1 },
+                2: { colors: 9, time: 2500, scoreMultiplier: 2 },
+                3: { colors: 12, time: 2000, scoreMultiplier: 3 }
+            };
+            
+            const config = levelConfig[level] || levelConfig[1];
+            
+            // Cores disponíveis (mais cores para níveis mais altos)
+            const allColors = [
+                { name: 'Vermelho', value: 'red', hex: '#ef4444' },
+                { name: 'Azul', value: 'blue', hex: '#3b82f6' },
+                { name: 'Verde', value: 'green', hex: '#22c55e' },
+                { name: 'Amarelo', value: 'yellow', hex: '#eab308' },
+                { name: 'Laranja', value: 'orange', hex: '#f97316' },
+                { name: 'Roxo', value: 'purple', hex: '#a855f7' },
+                { name: 'Rosa', value: 'pink', hex: '#ec4899' },
+                { name: 'Marrom', value: 'brown', hex: '#92400e' },
+                { name: 'Cinza', value: 'gray', hex: '#6b7280' },
+                { name: 'Preto', value: 'black', hex: '#000000' },
+                { name: 'Branco', value: 'white', hex: '#ffffff', textColor: '#000000' },
+                { name: 'Turquesa', value: 'teal', hex: '#0d9488' }
+            ];
+            
+            const colors = allColors.slice(0, config.colors);
+            
+            // Selecionar cor alvo
+            const targetColor = colors[Math.floor(Math.random() * colors.length)];
+            
+            // Embaralhar cores
+            const shuffledColors = [...colors].sort(() => Math.random() - 0.5);
+            
+            // Criar interface do jogo
+            gameContent.innerHTML = `
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-semibold text-primary-700 mb-4">Encontre a cor:</h3>
+                    <div class="text-4xl font-bold mb-2" style="color: ${targetColor.hex}">${targetColor.name}</div>
+                    <div class="w-32 h-32 mx-auto rounded-full shadow-lg mb-4 border-2 border-gray-300" style="background-color: ${targetColor.hex}"></div>
+                    <p class="text-gray-600">Toque na cor correta abaixo (${config.colors} opções)</p>
+                    <div class="mt-2 text-sm text-gray-500">
+                        <i class="fas fa-clock mr-1"></i> Pontuação: ${10 * config.scoreMultiplier} pontos por acerto
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 w-full max-w-md">
+                    ${shuffledColors.map(color => `
+                        <div class="game-option w-24 h-24 rounded-xl cursor-pointer shadow-md flex items-center justify-center text-white text-2xl font-bold transition-transform hover:scale-105 border-2 border-gray-300" 
+                             style="background-color: ${color.hex}; ${color.value === 'white' ? 'color: #000000;' : ''}"
+                             data-color="${color.value}">
+                            ${color.value === targetColor.value ? '✓' : ''}
+                        </div>
+                    `).join('')}
+                </div>
+                <div id="game-feedback" class="mt-6 text-xl font-semibold min-h-8"></div>
+            `;
+            
+            // Adicionar event listeners
+            gameContent.querySelectorAll('.game-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedColor = this.getAttribute('data-color');
+                    
+                    if (selectedColor === targetColor.value) {
+                        // Resposta correta
+                        this.classList.add('animate__animated', 'animate__bounce');
+                        document.getElementById('game-feedback').innerHTML = `
+                            <div class="text-green-600 animate__animated animate__fadeIn">
+                                <i class="fas fa-check-circle mr-2"></i> Parabéns! Correto!
+                            </div>
+                        `;
+                        
+                        // Atualizar pontuação
+                        const currentScore = parseInt(document.getElementById('game-score').textContent);
+                        document.getElementById('game-score').textContent = currentScore + (10 * config.scoreMultiplier);
+                        
+                        // Próxima rodada após um breve delay
+                        setTimeout(() => {
+                            initColorsGame(level);
+                        }, 1500);
+                    } else {
+                        // Resposta incorreta
+                        this.classList.add('animate__animated', 'animate__shakeX');
+                        document.getElementById('game-feedback').innerHTML = `
+                            <div class="text-red-600 animate__animated animate__fadeIn">
+                                <i class="fas fa-times-circle mr-2"></i> Tente novamente!
+                            </div>
+                        `;
+                        
+                        setTimeout(() => {
+                            this.classList.remove('animate__animated', 'animate__shakeX');
+                            document.getElementById('game-feedback').innerHTML = '';
+                        }, 1000);
+                    }
+                });
+            });
+        }
+
+        function initNumbersGame(level) {
+            const gameContent = document.getElementById('game-content');
+            
+            // Configurações por nível
+            const levelConfig = {
+                1: { maxNumber: 6, options: 6, scoreMultiplier: 1 },
+                2: { maxNumber: 10, options: 8, scoreMultiplier: 2 },
+                3: { maxNumber: 15, options: 10, scoreMultiplier: 3 }
+            };
+            
+            const config = levelConfig[level] || levelConfig[1];
+            
+            // Gerar número alvo
+            const targetNumber = Math.floor(Math.random() * config.maxNumber) + 1;
+            
+            // Gerar opções (incluindo o número correto e números aleatórios)
+            let options = [targetNumber];
+            while (options.length < config.options) {
+                const randomNum = Math.floor(Math.random() * config.maxNumber) + 1;
+                if (!options.includes(randomNum)) {
+                    options.push(randomNum);
+                }
+            }
+            
+            // Embaralhar opções
+            options = options.sort(() => Math.random() - 0.5);
+            
+            // Criar interface do jogo
+            gameContent.innerHTML = `
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-semibold text-primary-700 mb-4">Encontre o número:</h3>
+                    <div class="text-6xl font-bold text-primary-600 mb-4">${targetNumber}</div>
+                    <p class="text-gray-600">Quantas bolinhas você vê?</p>
+                </div>
+                <div class="mb-6">
+                    <div class="flex flex-wrap justify-center gap-2 mb-4">
+                        ${Array(targetNumber).fill().map(() => `
+                            <div class="w-8 h-8 bg-primary-500 rounded-full"></div>
+                        `).join('')}
+                    </div>
+                </div>
+                <div class="grid grid-cols-3 gap-4 w-full max-w-md">
+                    ${options.map(number => `
+                        <div class="game-option w-20 h-20 rounded-lg bg-gradient-to-br from-primary-500 to-blue-500 cursor-pointer shadow-md flex items-center justify-center text-white text-2xl font-bold hover:scale-105 transition-transform" data-number="${number}">
+                            ${number}
+                        </div>
+                    `).join('')}
+                </div>
+                <div id="game-feedback" class="mt-6 text-xl font-semibold min-h-8"></div>
+            `;
+            
+            // Adicionar event listeners
+            gameContent.querySelectorAll('.game-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedNumber = parseInt(this.getAttribute('data-number'));
+                    
+                    if (selectedNumber === targetNumber) {
+                        // Resposta correta
+                        this.classList.add('animate__animated', 'animate__bounce');
+                        document.getElementById('game-feedback').innerHTML = `
+                            <div class="text-green-600 animate__animated animate__fadeIn">
+                                <i class="fas fa-check-circle mr-2"></i> Excelente! Correto!
+                            </div>
+                        `;
+                        
+                        // Atualizar pontuação
+                        const currentScore = parseInt(document.getElementById('game-score').textContent);
+                        document.getElementById('game-score').textContent = currentScore + (10 * config.scoreMultiplier);
+                        
+                        // Próxima rodada após um breve delay
+                        setTimeout(() => {
+                            initNumbersGame(level);
+                        }, 1500);
+                    } else {
+                        // Resposta incorreta
+                        this.classList.add('animate__animated', 'animate__shakeX');
+                        document.getElementById('game-feedback').innerHTML = `
+                            <div class="text-red-600 animate__animated animate__fadeIn">
+                                <i class="fas fa-times-circle mr-2"></i> Tente outra vez!
+                            </div>
+                        `;
+                        
+                        setTimeout(() => {
+                            this.classList.remove('animate__animated', 'animate__shakeX');
+                            document.getElementById('game-feedback').innerHTML = '';
+                        }, 1000);
+                    }
+                });
+            });
+        }
+
+        function initLettersGame(level) {
+            const gameContent = document.getElementById('game-content');
+            
+            // Configurações por nível
+            const levelConfig = {
+                1: { letters: 'ABCDEF', options: 6, scoreMultiplier: 1 },
+                2: { letters: 'GHIJKL', options: 8, scoreMultiplier: 2 },
+                3: { letters: 'MNOPQR', options: 10, scoreMultiplier: 3 }
+            };
+            
+            const config = levelConfig[level] || levelConfig[1];
+            
+            const lettersArray = config.letters.split('');
+            const targetLetter = lettersArray[Math.floor(Math.random() * lettersArray.length)];
+            
+            // Palavras que começam com cada letra
+            const letterWords = {
+                'A': 'Abelha', 'B': 'Bola', 'C': 'Casa', 'D': 'Dado', 'E': 'Elefante', 'F': 'Flor',
+                'G': 'Gato', 'H': 'Helicóptero', 'I': 'Ímã', 'J': 'Janela', 'K': 'Koala', 'L': 'Lua',
+                'M': 'Maçã', 'N': 'Navio', 'O': 'Ovo', 'P': 'Pato', 'Q': 'Queijo', 'R': 'Rato'
+            };
+            
+            // Gerar opções (incluindo a letra correta e letras aleatórias)
+            let options = [targetLetter];
+            while (options.length < config.options) {
+                const randomLetter = lettersArray[Math.floor(Math.random() * lettersArray.length)];
+                if (!options.includes(randomLetter)) {
+                    options.push(randomLetter);
+                }
+            }
+            
+            // Embaralhar opções
+            options = options.sort(() => Math.random() - 0.5);
+            
+            // Criar interface do jogo
+            gameContent.innerHTML = `
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-semibold text-primary-700 mb-4">Encontre a letra:</h3>
+                    <div class="text-6xl font-bold text-primary-600 mb-2">${targetLetter}</div>
+                    <p class="text-gray-600">Começa com: <span class="font-semibold">"${letterWords[targetLetter]}"</span></p>
+                </div>
+                <div class="grid grid-cols-3 gap-4 w-full max-w-md">
+                    ${options.map(letter => `
+                        <div class="game-option w-20 h-20 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 cursor-pointer shadow-md flex items-center justify-center text-white text-2xl font-bold hover:scale-105 transition-transform" data-letter="${letter}">
+                            ${letter}
+                        </div>
+                    `).join('')}
+                </div>
+                <div id="game-feedback" class="mt-6 text-xl font-semibold min-h-8"></div>
+            `;
+            
+            // Adicionar event listeners
+            gameContent.querySelectorAll('.game-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedLetter = this.getAttribute('data-letter');
+                    
+                    if (selectedLetter === targetLetter) {
+                        // Resposta correta
+                        this.classList.add('animate__animated', 'animate__bounce');
+                        document.getElementById('game-feedback').innerHTML = `
+                            <div class="text-green-600 animate__animated animate__fadeIn">
+                                <i class="fas fa-check-circle mr-2"></i> Muito bem! Correto!
+                            </div>
+                        `;
+                        
+                        // Atualizar pontuação
+                        const currentScore = parseInt(document.getElementById('game-score').textContent);
+                        document.getElementById('game-score').textContent = currentScore + (10 * config.scoreMultiplier);
+                        
+                        // Próxima rodada após um breve delay
+                        setTimeout(() => {
+                            initLettersGame(level);
+                        }, 1500);
+                    } else {
+                        // Resposta incorreta
+                        this.classList.add('animate__animated', 'animate__shakeX');
+                        document.getElementById('game-feedback').innerHTML = `
+                            <div class="text-red-600 animate__animated animate__fadeIn">
+                                <i class="fas fa-times-circle mr-2"></i> Continue tentando!
+                            </div>
+                        `;
+                        
+                        setTimeout(() => {
+                            this.classList.remove('animate__animated', 'animate__shakeX');
+                            document.getElementById('game-feedback').innerHTML = '';
+                        }, 1000);
+                    }
+                });
+            });
+        }
+
+        function initShapesGame(level) {
+            const gameContent = document.getElementById('game-content');
+            
+            // Configurações por nível
+            const levelConfig = {
+                1: { shapes: 6, scoreMultiplier: 1 },
+                2: { shapes: 9, scoreMultiplier: 2 },
+                3: { shapes: 12, scoreMultiplier: 3 }
+            };
+            
+            const config = levelConfig[level] || levelConfig[1];
+            
+            // Todas as formas disponíveis
+            const allShapes = [
+                { name: 'Círculo', emoji: '⚪', sides: 0 },
+                { name: 'Triângulo', emoji: '▲', sides: 3 },
+                { name: 'Quadrado', emoji: '■', sides: 4 },
+                { name: 'Retângulo', emoji: '▭', sides: 4 },
+                { name: 'Estrela', emoji: '⭐', sides: 5 },
+                { name: 'Coração', emoji: '❤️', sides: 0 },
+                { name: 'Pentágono', emoji: '⬟', sides: 5 },
+                { name: 'Hexágono', emoji: '⬢', sides: 6 },
+                { name: 'Losango', emoji: '◆', sides: 4 },
+                { name: 'Oval', emoji: '⬯', sides: 0 },
+                { name: 'Cruz', emoji: '✚', sides: 0 },
+                { name: 'Lua', emoji: '🌙', sides: 0 }
+            ];
+            
+            const shapes = allShapes.slice(0, config.shapes);
+            const targetShape = shapes[Math.floor(Math.random() * shapes.length)];
+            
+            // Embaralhar formas
+            const shuffledShapes = [...shapes].sort(() => Math.random() - 0.5);
+            
+            // Criar interface do jogo
+            gameContent.innerHTML = `
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-semibold text-primary-700 mb-4">Encontre a forma:</h3>
+                    <div class="text-5xl mb-4">${targetShape.emoji}</div>
+                    <div class="text-2xl font-bold text-primary-600">${targetShape.name}</div>
+                    ${targetShape.sides > 0 ? `<p class="text-gray-600 mt-2">Tem ${targetShape.sides} lados</p>` : ''}
+                </div>
+                <div class="grid grid-cols-3 gap-4 w-full max-w-md">
+                    ${shuffledShapes.map(shape => `
+                        <div class="game-option w-20 h-20 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 cursor-pointer shadow-md flex items-center justify-center text-white text-3xl hover:scale-105 transition-transform" data-shape="${shape.name}">
+                            ${shape.emoji}
+                        </div>
+                    `).join('')}
+                </div>
+                <div id="game-feedback" class="mt-6 text-xl font-semibold min-h-8"></div>
+            `;
+            
+            // Adicionar event listeners
+            gameContent.querySelectorAll('.game-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedShape = this.getAttribute('data-shape');
+                    
+                    if (selectedShape === targetShape.name) {
+                        // Resposta correta
+                        this.classList.add('animate__animated', 'animate__bounce');
+                        document.getElementById('game-feedback').innerHTML = `
+                            <div class="text-green-600 animate__animated animate__fadeIn">
+                                <i class="fas fa-check-circle mr-2"></i> Incrível! Correto!
+                            </div>
+                        `;
+                        
+                        // Atualizar pontuação
+                        const currentScore = parseInt(document.getElementById('game-score').textContent);
+                        document.getElementById('game-score').textContent = currentScore + (10 * config.scoreMultiplier);
+                        
+                        // Próxima rodada após um breve delay
+                        setTimeout(() => {
+                            initShapesGame(level);
+                        }, 1500);
+                    } else {
+                        // Resposta incorreta
+                        this.classList.add('animate__animated', 'animate__shakeX');
+                        document.getElementById('game-feedback').innerHTML = `
+                            <div class="text-red-600 animate__animated animate__fadeIn">
+                                <i class="fas fa-times-circle mr-2"></i> Tente novamente!
+                            </div>
+                        `;
+                        
+                        setTimeout(() => {
+                            this.classList.remove('animate__animated', 'animate__shakeX');
+                            document.getElementById('game-feedback').innerHTML = '';
+                        }, 1000);
+                    }
+                });
+            });
+        }
+
+        function getGameTitle(gameType) {
+            const titles = {
+                'colors': 'Aprender Cores',
+                'numbers': 'Contar Números',
+                'letters': 'Reconhecer Letras',
+                'shapes': 'Identificar Formas'
+            };
+            return titles[gameType] || 'Jogo Educativo';
+        }
+
+        function getLevelInstruction(gameType, level) {
+            const instructions = {
+                1: 'Fase Fácil - Comece com o básico',
+                2: 'Fase Média - Um pouco mais desafiador',
+                3: 'Fase Difícil - Teste seus conhecimentos'
+            };
+            
+            return instructions[level] || 'Siga as instruções na tela';
+        }
+
+        function exitGame() {
+            // Salvar progresso se houver perfil ativo
+            if (AppState.currentProfile && AppState.currentGame && AppState.currentLevel) {
+                const score = parseInt(document.getElementById('game-score').textContent);
+                saveGameProgress(AppState.currentGame, AppState.currentLevel, score);
+            }
+            
+            showScreen('main');
+        }
+
+        function saveGameProgress(gameType, level, score) {
+            if (!AppState.currentProfile) return;
+            
+            const progress = AppState.gameProgress[AppState.currentProfile.id] || {};
+            
+            // Atualizar ou criar progresso para este jogo
+            if (!progress[gameType] || level > (progress[gameType].level || 0)) {
+                progress[gameType] = {
+                    level: level,
+                    score: (progress[gameType]?.score || 0) + score,
+                    date: new Date().toISOString(),
+                    attempts: (progress[gameType]?.attempts || 0) + 1
+                };
+                
+                AppState.gameProgress[AppState.currentProfile.id] = progress;
+                localStorage.setItem('gameProgress', JSON.stringify(AppState.gameProgress));
+                
+                // Mostrar mensagem de conquista se avançou de nível
+                if (level > 1) {
+                    showToast(`Parabéns! Você completou a Fase ${level-1} de ${getGameTitle(gameType)}!`, 'success');
+                }
+            }
+            
+            updateProgressBars();
+            updateRecentProgress();
+        }
+
+        // Sistema de Configurações
+        function updateDifficultyText() {
+            const level = document.getElementById('difficulty-level').value;
+            const levels = {
+                1: 'Muito Fácil',
+                2: 'Fácil',
+                3: 'Médio',
+                4: 'Difícil',
+                5: 'Muito Difícil'
+            };
+            
+            document.getElementById('difficulty-text').textContent = `Nível ${level} - ${levels[level]}`;
+        }
+
+        function saveSettings() {
+            const difficulty = parseInt(document.getElementById('difficulty-level').value);
+            const soundEffects = document.getElementById('sound-effects').checked;
+            
+            const activities = [];
+            document.querySelectorAll('input[name="activities"]:checked').forEach(checkbox => {
+                activities.push(checkbox.value);
+            });
+            
+            // Salvar configurações globais
+            AppState.settings.sound = soundEffects;
+            localStorage.setItem('settings', JSON.stringify(AppState.settings));
+            
+            // Salvar configurações do perfil se existir
+            if (AppState.currentProfile) {
+                const profileIndex = AppState.profiles.findIndex(p => p.id === AppState.currentProfile.id);
+                if (profileIndex !== -1) {
+                    AppState.profiles[profileIndex].settings = {
+                        difficulty,
+                        activities,
+                        sessionTime: 30
+                    };
+                    
+                    localStorage.setItem('profiles', JSON.stringify(AppState.profiles));
+                    AppState.currentProfile = AppState.profiles[profileIndex];
+                }
+            }
+            
+            showScreen('main');
+            showToast('Configurações salvas com sucesso!');
+        }
+
+        function applySettings() {
+            // Aplicar configurações de acessibilidade
+            if (AppState.settings.highContrast) {
+                document.body.classList.add('high-contrast');
+            }
+        }
+
+        function showReports() {
+            showModal(
+                'Relatórios de Progresso',
+                `Os relatórios detalhados estão em desenvolvimento.<br><br>
+                Em breve você poderá:
+                • Visualizar progresso por atividade
+                • Ver estatísticas de aprendizado
+                • Exportar relatórios
+                • Comparar desempenho ao longo do tempo`,
+                null
+            );
+        }
+
+        function toggleAccessibility() {
+            AppState.settings.highContrast = !AppState.settings.highContrast;
+            document.body.classList.toggle('high-contrast');
+            localStorage.setItem('settings', JSON.stringify(AppState.settings));
+            
+            showToast(AppState.settings.highContrast ? 
+                'Modo alto contraste ativado' : 
+                'Modo alto contraste desativado'
+            );
+        }
+
+        function showHelp() {
+            showModal(
+                'Ajuda e Suporte',
+                `Bem-vindo ao Mundo Colorido!<br><br>
+                <strong>Como usar:</strong>
+                1. Crie um perfil para cada criança
+                2. Selecione atividades educativas
+                3. Cada jogo tem 3 fases de dificuldade
+                4. Complete uma fase para desbloquear a próxima
+                5. Acompanhe o progresso
+                6. Ajuste configurações conforme necessário<br><br>
+                <strong>Recursos:</strong>
+                • Jogos educativos com 3 fases cada
+                • Interface amigável para crianças
+                • Personalização por perfil
+                • Acompanhamento de progresso<br><br>
+                Para mais ajuda, entre em contato com nosso suporte.`,
+                null
+            );
+        }
+
+        // Sistema de Upload de Imagem
+        function setupImageUpload() {
+            const imageUploadContainer = document.getElementById('image-upload-container');
+            const profileImageInput = document.getElementById('profile-image');
+            const profileImagePreview = document.getElementById('profile-image-preview');
+            const imagePlaceholder = document.getElementById('image-placeholder');
+            const imageError = document.getElementById('image-error');
+            
+            imageUploadContainer.addEventListener('click', () => {
+                profileImageInput.click();
+            });
+            
+            profileImageInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                // Validar tipo de arquivo
+                const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+                if (!validTypes.includes(file.type)) {
+                    showFormError('image-error', 'Por favor, selecione uma imagem JPG ou PNG.');
+                    return;
+                }
+                
+                // Validar tamanho do arquivo (2MB)
+                if (file.size > 2 * 1024 * 1024) {
+                    showFormError('image-error', 'A imagem deve ter no máximo 2MB.');
+                    return;
+                }
+                
+                clearFormError('image-error');
+                
+                // Criar preview da imagem
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profileImagePreview.src = e.target.result;
+                    profileImagePreview.classList.remove('hidden');
+                    imagePlaceholder.classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Função para criar partículas flutuantes
+        function createFloatingParticles() {
+            const colors = ['#0ea5e9', '#22c55e', '#eab308', '#a855f7', '#ec4899'];
+            const container = document.querySelector('main');
+            
+            if (!container) return;
+            
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = `${Math.random() * 15 + 5}px`;
+                particle.style.height = particle.style.width;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.opacity = Math.random() * 0.2 + 0.1;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animation = `float ${Math.random() * 10 + 10}s ease-in-out infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particle.style.position = 'absolute';
+                particle.style.zIndex = '1';
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Utilitários
+        function showModal(title, message, confirmCallback) {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').innerHTML = message;
+            document.getElementById('modal-confirm').onclick = confirmCallback;
+            document.getElementById('confirmation-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('confirmation-modal').classList.add('hidden');
+        }
+
+        function executeModalAction() {
+            if (document.getElementById('modal-confirm').onclick) {
+                document.getElementById('modal-confirm').onclick();
+            }
+            closeModal();
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            
+            // Definir cor baseada no tipo
+            const borderColors = {
+                'success': 'green',
+                'error': 'red',
+                'warning': 'yellow',
+                'info': 'blue'
+            };
+            
+            toast.querySelector('.border-l-4').className = `border-l-4 border-${borderColors[type]}-500`;
+            toast.querySelector('i').className = `fas fa-${type === 'success' ? 'check' : 'exclamation'}-circle text-${borderColors[type]}-500 mr-3`;
+            
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        function showFormError(fieldId, message) {
+            const errorElement = document.getElementById(fieldId);
+            errorElement.textContent = message;
+            errorElement.classList.remove('hidden');
+        }
+
+        function clearFormError(fieldId) {
+            const errorElement = document.getElementById(fieldId);
+            errorElement.classList.add('hidden');
+        }
+
+        function clearFormErrors() {
+            document.querySelectorAll('.error-message').forEach(el => {
+                el.classList.add('hidden');
+            });
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+    </script>
+
+    
+
+
+<script>
+/* Integração Spring Boot API - mantém a interface Mundo Colorido 100% visualmente igual */
+const MundoAPI = {
+    baseUrl: '',
+    token: localStorage.getItem('jwtToken') || '',
+    atividades: [],
+    async login() {
+        if (this.token) return this.token;
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email: 'admin@jogoautismo.mz', senha: 'admin123'})
+            });
+            if (!res.ok) throw new Error('Falha ao autenticar');
+            const data = await res.json();
+            this.token = data.token;
+            localStorage.setItem('jwtToken', this.token);
+            return this.token;
+        } catch (e) {
+            console.warn('API indisponível. A interface continua em modo local.', e);
+            return '';
+        }
+    },
+    headers() {
+        return {
+            'Content-Type': 'application/json',
+            ...(this.token ? {'Authorization': 'Bearer ' + this.token} : {})
+        };
+    },
+    async request(url, options = {}) {
+        await this.login();
+        const res = await fetch(url, {
+            ...options,
+            headers: {...this.headers(), ...(options.headers || {})}
+        });
+        if (res.status === 401 || res.status === 403) {
+            localStorage.removeItem('jwtToken');
+            this.token = '';
+            await this.login();
+            return fetch(url, {
+                ...options,
+                headers: {...this.headers(), ...(options.headers || {})}
+            });
+        }
+        return res;
+    },
+    async carregarAlunos() {
+        const res = await this.request('/api/alunos');
+        if (!res.ok) throw new Error('Não foi possível carregar alunos');
+        return await res.json();
+    },
+    async criarAluno(profile) {
+        const nomes = (profile.name || '').trim().split(' ');
+        const body = {
+            nome: nomes[0] || profile.name || 'Criança',
+            apelido: nomes.slice(1).join(' ') || 'Perfil',
+            nuit: String(Date.now()).slice(-9),
+            genero: 'MASCULINO',
+            nivelAutismo: 'LEVE',
+            necessidadeEspecial: profile.notes || profile.interests || 'Acompanhamento educativo personalizado',
+            encarregadoId: 1
+        };
+        const res = await this.request('/api/alunos', {method: 'POST', body: JSON.stringify(body)});
+        if (!res.ok) throw new Error(await res.text());
+        return await res.json();
+    },
+    async atualizarAluno(id, profile) {
+        const nomes = (profile.name || '').trim().split(' ');
+        const body = {
+            nome: nomes[0] || profile.name || 'Criança',
+            apelido: nomes.slice(1).join(' ') || 'Perfil',
+            nuit: String(Date.now()).slice(-9),
+            genero: 'MASCULINO',
+            nivelAutismo: 'LEVE',
+            necessidadeEspecial: profile.notes || profile.interests || 'Acompanhamento educativo personalizado',
+            encarregadoId: 1
+        };
+        const res = await this.request('/api/alunos/' + id, {method: 'PUT', body: JSON.stringify(body)});
+        if (!res.ok) throw new Error(await res.text());
+        return await res.json();
+    },
+    async removerAluno(id) {
+        const res = await this.request('/api/alunos/' + id, {method: 'DELETE'});
+        if (!res.ok && res.status !== 204) throw new Error('Não foi possível remover aluno');
+    },
+    async carregarAtividades() {
+        if (this.atividades.length) return this.atividades;
+        const res = await this.request('/api/atividades');
+        if (res.ok) this.atividades = await res.json();
+        return this.atividades;
+    },
+    async registarProgresso(gameType, score) {
+        if (!AppState.currentProfile || !AppState.currentProfile.id) return;
+        const atividades = await this.carregarAtividades();
+        const mapa = {
+            colors: ['cor', 'forma', 'cores'],
+            numbers: ['número', 'numero', 'sequência'],
+            letters: ['palavra', 'letra'],
+            shapes: ['forma', 'cor']
+        };
+        const palavras = mapa[gameType] || [];
+        let atividade = atividades.find(a => palavras.some(p => (a.titulo || '').toLowerCase().includes(p)));
+        if (!atividade) atividade = atividades[0];
+        if (!atividade) return;
+        const pontuacao = Math.max(0, Math.min(100, parseInt(score || 0)));
+        const hoje = new Date().toISOString().slice(0, 10);
+        await this.request('/api/progressos', {
+            method: 'POST',
+            body: JSON.stringify({
+                alunoId: Number(AppState.currentProfile.id),
+                atividadeId: atividade.id,
+                pontuacao,
+                dataRealizacao: hoje
+            })
+        });
+    }
+};
+
+function alunoParaPerfil(aluno) {
+    return {
+        id: String(aluno.id),
+        name: `${aluno.nome || ''} ${aluno.apelido || ''}`.trim(),
+        age: 7,
+        interests: aluno.nivelAutismo ? `Nível: ${aluno.nivelAutismo}` : 'Atividades educativas',
+        notes: aluno.necessidadeEspecial || '',
+        photo: null,
+        backend: true,
+        createdAt: new Date().toISOString(),
+        settings: { difficulty: 3, activities: ['colors', 'numbers', 'letters', 'shapes'], sessionTime: 30 }
+    };
+}
+
+// Sobrescreve o carregamento de perfis para vir da base de dados MySQL via API
+loadProfiles = async function() {
+    try {
+        const alunos = await MundoAPI.carregarAlunos();
+        AppState.profiles = alunos.map(alunoParaPerfil);
+        localStorage.setItem('profiles', JSON.stringify(AppState.profiles));
+        updateProfilesList();
+        showToast('Perfis carregados da base de dados!', 'success');
+    } catch (e) {
+        console.warn(e);
+        AppState.profiles = JSON.parse(localStorage.getItem('profiles')) || [];
+        updateProfilesList();
+    }
+};
+
+// Sobrescreve o salvamento de perfil para cadastrar/editar aluno no backend
+saveProfile = async function(e) {
+    e.preventDefault();
+    const profileId = document.getElementById('profile-form').getAttribute('data-profile-id');
+    const name = document.getElementById('profile-name').value.trim();
+    const age = parseInt(document.getElementById('profile-age').value);
+    const interests = document.getElementById('profile-interests').value.trim();
+    const notes = document.getElementById('profile-notes').value.trim();
+    let isValid = true;
+    clearFormErrors();
+    if (!name) { showFormError('name-error', 'O nome é obrigatório.'); isValid = false; }
+    if (!age || age < 3 || age > 12) { showFormError('age-error', 'A idade deve estar entre 3 e 12 anos.'); isValid = false; }
+    if (!isValid) return;
+    const profile = {name, age, interests, notes};
+    try {
+        if (profileId && /^\d+$/.test(profileId)) {
+            await MundoAPI.atualizarAluno(profileId, profile);
+            showToast('Perfil atualizado na base de dados!', 'success');
+        } else {
+            await MundoAPI.criarAluno(profile);
+            showToast('Perfil criado na base de dados!', 'success');
+        }
+        await loadProfiles();
+        showScreen('profiles');
+    } catch (err) {
+        showToast('Erro ao salvar na API: ' + err.message, 'error');
+    }
+};
+
+// Remove aluno do backend quando o perfil tem ID numérico
+const deleteProfileOriginal = typeof deleteProfile === 'function' ? deleteProfile : null;
+deleteProfile = async function(profileId) {
+    try {
+        if (/^\d+$/.test(profileId)) {
+            await MundoAPI.removerAluno(profileId);
+            await loadProfiles();
+            closeModal();
+            showToast('Perfil removido da base de dados!', 'success');
+        } else if (deleteProfileOriginal) {
+            deleteProfileOriginal(profileId);
+        }
+    } catch (e) {
+        showToast('Erro ao remover: ' + e.message, 'error');
+    }
+};
+
+// Grava pontuação no MySQL e também mantém o progresso visual no navegador
+const saveGameProgressLocal = typeof saveGameProgress === 'function' ? saveGameProgress : null;
+saveGameProgress = async function(gameType, level, score) {
+    if (saveGameProgressLocal) saveGameProgressLocal(gameType, level, score);
+    try {
+        await MundoAPI.registarProgresso(gameType, score);
+        showToast('Pontuação gravada na base de dados!', 'success');
+    } catch (e) {
+        console.warn('Não foi possível gravar progresso na API:', e);
+    }
+};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

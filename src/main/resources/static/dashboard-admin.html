@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Dashboard Admin - Jogo Autismo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/dashboard-admin.html">Jogo Autismo - ADMIN</a>
+        <button onclick="sair()" class="btn btn-light btn-sm">Sair</button>
+    </div>
+</nav>
+<main class="container mt-4">
+    <h2 class="fw-bold">Painel Administrativo</h2>
+    <p class="text-muted" id="userInfo"></p>
+    <div class="row g-3">
+        <div class="col-md-4"><a class="card p-4 text-decoration-none" href="/criancas.html"><h4>Crianças/Alunos</h4><p>Gerir alunos cadastrados</p></a></div>
+        <div class="col-md-4"><a class="card p-4 text-decoration-none" href="/responsaveis.html"><h4>Encarregados</h4><p>Gerir responsáveis</p></a></div>
+        <div class="col-md-4"><a class="card p-4 text-decoration-none" href="/educadores.html"><h4>Educadores</h4><p>Gerir educadores</p></a></div>
+        <div class="col-md-4"><a class="card p-4 text-decoration-none" href="/atividades.html"><h4>Actividades</h4><p>Gerir actividades educativas</p></a></div>
+        <div class="col-md-4"><a class="card p-4 text-decoration-none" href="/sessoes.html"><h4>Progresso</h4><p>Consultar e gerir progresso</p></a></div>
+        <div class="col-md-4"><a class="card p-4 text-decoration-none" href="/jogos.html"><h4>Jogo</h4><p>Executar actividades educativas</p></a></div>
+    </div>
+</main>
+<script src="/js/api.js"></script>
+<script>exigePerfis('ADMIN');setUserInfo();</script>
+</body>
+</html>
